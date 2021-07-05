@@ -46,7 +46,7 @@ const accountLimiter = rateLimit({
 });
 
 app.use('/api', apiLimiter);
-//app.use('/api/v1/users/signup', accountLimiter);
+app.use('/api/v1/users/signup', accountLimiter);
 
 app.use(express.json({ limit: '10kb' })); //used to get body of the reqest body parser, here limit is used to restirct the amount of data that can be send by the user
 app.use(cookieParser());
