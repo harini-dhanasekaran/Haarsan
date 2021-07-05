@@ -1,0 +1,40 @@
+extends base
+
+mixin options(link, icon, name, active)
+  li(class = `${active ? 'side-nav--active' :' '}`)
+    a(href=`${link}`)
+      svg
+        use(xlink:href=`img/icons.svg#icon-${icon}`)
+      | #{name}
+
+mixin reviewCard(name, detail)
+  .card.card__review--gap
+    h4.card__review--heading #{name}
+    .card__review--data
+      span #{detail}
+
+block content
+  main.main
+    .user-view
+      nav.user-view__menu
+        ul.side-nav
+          +options('/me','settings', 'Settings', false)
+          +options('#','star',' My reviews', true)
+
+        - if(user.role === 'admin')
+          .admin-nav
+            h5.admin-nav__heading Admin
+            ul.side-nav
+              +options('#','map','Manage tour', false)
+              +options('#','users','Manage users', false)
+              +options('#','star','Manage reviews', false)
+      .user-view__content
+        .user-view__form-container
+          h2.heading-secondary.ma-bt-md Your Reviews
+          -var count = 0;
+          each review in reviews
+            - if(review.user.name === user.name)
+              +reviewCard(`${review.tour.name}`,`${review.review}`)
+              -count = 1;
+          - if(count === 0)
+            +reviewCard('No reviews', 'Your have not written any reviews')
