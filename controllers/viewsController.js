@@ -41,6 +41,32 @@ exports.getTour = catchAsync(async (req, res, next) => {
     });
 });
 
+exports.getMe = catchAsync(async (req, res, next) => {
+  res
+    .status(200)
+    .set(
+      'Content-Security-Policy',
+      "script-src 'self' https://cdnjs.cloudflare.com"
+    )
+    .render('account', {
+      title: 'My account',
+    });
+});
+
+exports.getMyReview = catchAsync(async (req, res, next) => {
+  const Allreviews = await Review.find();
+  res
+    .status(200)
+    .set(
+      'Content-Security-Policy',
+      "script-src 'self' https://cdnjs.cloudflare.com"
+    )
+    .render('myReviews', {
+      title: 'My Reviews',
+      reviews: Allreviews,
+    });
+});
+
 exports.getLogin = catchAsync(async (req, res, next) => {
   res
     .status(200)
@@ -53,16 +79,14 @@ exports.getLogin = catchAsync(async (req, res, next) => {
     });
 });
 
-exports.getMe = catchAsync(async (req, res, next) => {
-  res.status(200).render('account', {
-    title: 'My account',
-  });
-});
-
-exports.getMyReview = catchAsync(async (req, res, next) => {
-  const Allreviews = await Review.find();
-  res.status(200).render('myReviews', {
-    title: 'My Reviews',
-    reviews: Allreviews,
-  });
+exports.signUp = catchAsync(async (req, res, next) => {
+  res
+    .status(200)
+    .set(
+      'Content-Security-Policy',
+      "script-src 'self' https://cdnjs.cloudflare.com"
+    )
+    .render('signUp', {
+      title: 'Sign Up',
+    });
 });

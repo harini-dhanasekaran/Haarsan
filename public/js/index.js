@@ -2,13 +2,25 @@
 import '@babel/polyfill';
 import { login, logout } from './login';
 import { updateMe, updatePassword } from './updateSettings';
+import { signUp } from './signUp.js';
 
 //DOM elements
 const loginForm = document.querySelector('.form-login');
 const logOutBtn = document.querySelector('.nav__el--logout');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-settings');
+const signUpForm = document.querySelector('.form--signup');
 
+if (signUpForm) {
+  signUpForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const passwordConfirm = document.getElementById('passwordConfirm').value;
+    signUp(name, email, password, passwordConfirm);
+  });
+}
 if (loginForm) {
   loginForm.addEventListener('submit', (e) => {
     const email = document.getElementById('email').value;

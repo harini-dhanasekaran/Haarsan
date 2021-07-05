@@ -4,6 +4,8 @@ const router = express.Router();
 const viewsController = require(`${__dirname}/../controllers/viewsController`);
 const authController = require('../controllers/authControllers');
 
+
+router.get('/signUp', viewsController.signUp);
 router.get('/me', authController.protect, viewsController.getMe);
 router.get('/myReview', authController.protect,viewsController.getMyReview);
 

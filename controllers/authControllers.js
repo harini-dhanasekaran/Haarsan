@@ -40,10 +40,9 @@ exports.signup = catchAsync(async (req, res, next) => {
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
     passwordChangedAt: req.body.passwordChangedAt,
-    role: req.body.role,
   });
-  const url = `${req.protocol}://${req.get('host')}`;
-  await new Email(newUser,url).sendWelcome();
+  // const url = `${req.protocol}://${req.get('host')}`;
+  // await new Email(newUser,url).sendWelcome();
   //header is automatically created
   //JWT token has 3 parts header, payload, signature
   createSendToken(newUser, 201, res);
@@ -173,7 +172,9 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
   // send the mail
   try {
-    const resetURL = `${req.protocol}://${req.get('host')}/api/v1/users/resetPassword/${resetToken}`;
+    const resetURL = `${req.protocol}://${req.get(
+      'host'
+    )}/api/v1/users/resetPassword/${resetToken}`;
     await new Email(user, resetURL).sendPasswordReset();
     res.status(200).json({
       status: 'success',

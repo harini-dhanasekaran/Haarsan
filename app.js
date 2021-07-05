@@ -39,7 +39,7 @@ const apiLimiter = rateLimit({
   message: 'Too many requests from this IP, please try again after an hour',
 });
 const accountLimiter = rateLimit({
-  max: 5,
+  max: 10,
   windowMs: 60 * 60 * 1000,
   message:
     'Too many accounts created from this IP, please try again after an hour',
