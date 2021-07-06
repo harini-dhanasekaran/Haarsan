@@ -13,7 +13,7 @@ export const forgotPassword = async (email) => {
       },
     });
     if (res.data.status === 'success') {
-      showAlert('success', res.data.message);
+      showAlert('success', 'The reset has been sent to your mail!');
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
@@ -32,10 +32,10 @@ export const resetPassword = async (password, passwordConfirm, token,email) => {
       },
     });
     if (res.data.status === 'success') {
-      showAlert('success', 'The password has been reset successfully');
+      showAlert('success', 'The password has been successfully changed');
       location.assign('/');
     }
-  } catch (err) {
+  } catch (err) { 
     showAlert('error', err.response.data.message);
     console.log(err.response);
   }
