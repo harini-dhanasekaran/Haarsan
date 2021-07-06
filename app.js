@@ -18,6 +18,7 @@ const globalErrorHandler = require('./controllers/errorControllers');
 //to get info about status and routes
 const app = express();
 
+app.enable('trust proxy');
 //to get access to view for pug
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));

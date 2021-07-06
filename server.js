@@ -47,4 +47,10 @@ process.on('unhandledRejection', (err) => {
   });
 });
 
+process.on('SIGTERM', () => {
+  console.log('⏬ SIGTERM RECEIVED. Shutting down gracefully');
+  server.close(() => {
+    console.log('🧨 process terminated');
+  });
+});
 //web RTC, socketIO with express
