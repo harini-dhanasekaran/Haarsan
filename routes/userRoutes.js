@@ -10,7 +10,7 @@ router.post('/login', authController.login);
 router.get('/logout', authController.logout);
 
 router.post('/forgotPassword', authController.forgotPassword);
-router.patch('/resetPassword/:token', authController.resetPassword);
+router.patch('/resetPassword/:email', authController.resetPassword);
 
 //middleware to check all the below routes are protected
 router.use(authController.protect);

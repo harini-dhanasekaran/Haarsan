@@ -90,3 +90,42 @@ exports.signUp = catchAsync(async (req, res, next) => {
       title: 'Sign Up',
     });
 });
+
+exports.manageTours = catchAsync(async (req, res, next) => {
+  const tours = await Tour.find();
+  res
+    .status(200)
+    .set(
+      'Content-Security-Policy',
+      "script-src 'self' https://cdnjs.cloudflare.com"
+    )
+    .render('manageTours', {
+      title: 'Manage Tours',
+      tours: tours,
+    });
+});
+
+exports.forgotPassword = catchAsync(async (req, res, next) => {
+  res
+    .status(200)
+    .set(
+      'Content-Security-Policy',
+      "script-src 'self' https://cdnjs.cloudflare.com"
+    )
+    .render('forgotPassword', {
+      title: 'Forgot Password',
+    });
+});
+
+exports.resetPassword = catchAsync(async (req, res, next) => {
+  if (!res.locals.user) {
+    const {token} = req.query;
+    res.status(200).render('resetPassword', {
+      title: 'Reset Password',
+      token:token,
+      email: req.params.email
+    });
+  } else {
+    res.redirect('/');
+  }
+});

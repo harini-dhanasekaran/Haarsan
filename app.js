@@ -8,6 +8,8 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+
+const compression = require('compression');
 const cookieParser = require('cookie-parser');
 //used for error handling
 const AppError = require('./utils/appError');
@@ -70,6 +72,8 @@ app.use(
     ],
   })
 );
+
+app.use(compression());
 
 //user defined middleware to check the request time
 app.use((req, res, next) => {

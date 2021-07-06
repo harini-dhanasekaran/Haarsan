@@ -1330,3 +1330,26 @@ body {
 .card__review--gap {
   margin-bottom: 3rem;
 }
+.align--center {
+  margin-left: 2rem;
+  padding: 1rem 2rem !important;
+  font-size: 1.5rem !important;
+}
+.size_small {
+  height: 13rem !important;
+}
+.text_size_large {
+  font-size: 2rem !important;
+  font-weight: bold !important;
+}
+.btn-move {
+  margin: 3rem auto 0 auto;
+  display: block;
+}
+.btn--blue{
+  background-color: rgb(39, 39, 39);
+  color: rgb(230, 230, 230);
+}
+.remove--outline{
+  text-decoration:none;
+}

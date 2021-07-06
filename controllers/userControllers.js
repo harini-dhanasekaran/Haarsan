@@ -63,9 +63,6 @@ exports.getMe = function (req, res, next) {
 };
 
 exports.updateMe = catchAsync(async (req, res, next) => {
-  console.log(req.body);
-  console.log(req.file);
-
   if (req.body.password || req.body.confirmPassword) {
     return next(
       new AppError(

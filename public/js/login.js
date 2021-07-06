@@ -1,23 +1,24 @@
 /* eslint-disable */
 import axios from 'axios';
+import { showAlert } from './alert.js';
 export const login = async (email, password) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: 'http://127.0.0.1:3000/api/v1/users/login',
+      url: '/api/v1/users/login',
       data: {
         email: email,
         password: password,
       },
     });
     if (res.data.status === 'success') {
-      alert('Logged in successfully');
+      showAlert('success','Logged in successfully');
       window.setTimeout(() => {
         location.assign('/');
-      }, 500);
+      }, 1500);
     }
   } catch (err) {
-    alert(err.response.data.message);
+    showAlert('error',err.response.data.message);
   }
 };
 
@@ -25,14 +26,17 @@ export const logout = async () => {
   try {
     const res = await axios({
       method: 'GET',
-      url: 'http://127.0.0.1:3000/api/v1/users/logout',
+      url: '/api/v1/users/logout',
     });
     if (res.data.status === 'success') {
-      location.reload(true);
-      location.assign('/');
+      showAlert('success', 'Logged out successfully');
+      window.setTimeout(() => {
+        location.reload(true);
+        location.assign('/');
+      }, 1000);
     }
   } catch (err) {
-    alert('error logging out, try again');
+    showAlert('error','error logging out, try again');
     console.log(err);
   }
 };

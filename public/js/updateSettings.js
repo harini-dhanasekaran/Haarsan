@@ -1,21 +1,23 @@
 /* eslint-disable */
 
 import axios from 'axios';
+import { showAlert } from './alert.js';
 
 export const updateMe = async (data) => {
   try {
     const res = await axios({
       method: 'PATCH',
-      url: 'http://127.0.0.1:3000/api/v1/users/updateMe',
+      url: '/api/v1/users/updateMe',
       data: data,
     });
     if (res.data.status === 'success') {
-      alert('Your data are successfully updated');
-      location.reload(true);
+      showAlert('success','Your data are successfully updated');
+      window.setTimeout(() => {
+        location.reload(true);
+      }, 1000);
     }
   } catch (err) {
-    alert(err.response.data.message);
-    console.log(err.response.data.message);
+    showAlert('error',err.response.data.message);
   }
 };
 
@@ -23,7 +25,7 @@ export const updatePassword = async (curPass, newPass, conPass) => {
   try {
     const res = await axios({
       method: 'PATCH',
-      url: 'http://127.0.0.1:3000/api/v1/users/updatePassword',
+      url: '/api/v1/users/updatePassword',
       data: {
         passwordCurrent: curPass,
         password: newPass,
@@ -31,10 +33,9 @@ export const updatePassword = async (curPass, newPass, conPass) => {
       },
     });
     if (res.data.status === 'success') {
-      alert('Your password has been updated');
+      showAlert('success','Your password has been updated');
     }
   } catch (err) {
-    alert(err.response.data.message);
-    console.log(err);
+    showAlert('error',err.response.data.message);
   }
 };

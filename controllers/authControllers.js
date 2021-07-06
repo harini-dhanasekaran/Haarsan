@@ -41,8 +41,8 @@ exports.signup = catchAsync(async (req, res, next) => {
     passwordConfirm: req.body.passwordConfirm,
     passwordChangedAt: req.body.passwordChangedAt,
   });
-  // const url = `${req.protocol}://${req.get('host')}`;
-  // await new Email(newUser,url).sendWelcome();
+  const url = `${req.protocol}://${req.get('host')}`;
+  await new Email(newUser, url).sendWelcome();
   //header is automatically created
   //JWT token has 3 parts header, payload, signature
   createSendToken(newUser, 201, res);
@@ -172,9 +172,9 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
   // send the mail
   try {
-    const resetURL = `${req.protocol}://${req.get(
-      'host'
-    )}/api/v1/users/resetPassword/${resetToken}`;
+    const resetURL = `${req.protocol}://${req.get('host')}/resetPassword/${
+      user.email
+    }?token=${resetToken}`;
     await new Email(user, resetURL).sendPasswordReset();
     res.status(200).json({
       status: 'success',
@@ -195,15 +195,18 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
 exports.resetPassword = catchAsync(async (req, res, next) => {
   // 1. get user based on tokens
+  // console.log('from auth_controller 😊');
+  // console.log(req.query);
+  // console.log(req.params.email);
   const hashedToken = crypto
     .createHash('sha256')
-    .update(req.params.token)
+    .update(req.query.token)
     .digest('hex');
   const user = await User.findOne({
     passwordResetToken: hashedToken,
     passwordResetExpires: { $gt: Date.now() },
   });
-
+  //console.log(user);
   //2. if token has not expired, then set the new password for the valid users
   if (!user) {
     return next(new AppError('The token is invalid or has expired', 400));
