@@ -13,7 +13,7 @@ export const forgotPassword = async (email) => {
       },
     });
     if (res.data.status === 'success') {
-      showAlert('success', 'The reset has been sent to your mail!');
+      showAlert('success', 'The reset link has been sent to your mail!');
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
@@ -33,7 +33,10 @@ export const resetPassword = async (password, passwordConfirm, token,email) => {
     });
     if (res.data.status === 'success') {
       showAlert('success', 'The password has been successfully changed');
-      location.assign('/');
+      window.setTimeout(() => {
+        location.reload(true);
+        location.assign('/');
+      }, 1500);
     }
   } catch (err) { 
     showAlert('error', err.response.data.message);

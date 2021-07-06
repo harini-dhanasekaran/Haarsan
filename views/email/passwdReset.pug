@@ -3,7 +3,7 @@ extends baseEmail
 block content
   p Hi #{firstName},
   p Password Reset link
-  p Forgot your password? Please click the following link to change yout password.This token is only valid for 10 mins.
+  p Forgot your password? Please click the following link to change your password.This link is valid only for 10 mins.
   table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
     tbody
       tr
@@ -14,4 +14,4 @@ block content
                 td
                   a(href=`${url}`, target='_blank') Click this link
   p Thanks,
-  p - The Haarsan Tour accounts team
+  p - The Haarsan account team
