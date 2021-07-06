@@ -1346,10 +1346,17 @@ body {
   margin: 3rem auto 0 auto;
   display: block;
 }
-.btn--blue{
+.btn--blue {
   background-color: rgb(39, 39, 39);
   color: rgb(230, 230, 230);
 }
-.remove--outline{
-  text-decoration:none;
+.remove--outline {
+  text-decoration: none;
+}
+.align-reviews {
+  margin: 5rem 50rem;
+  display: block;
+  font-size: 3rem;
+  color: black;
+  font-weight: 600;
 }

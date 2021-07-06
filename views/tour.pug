@@ -71,3 +71,6 @@ block content
       .reviews
         each review in tour.reviews
           +reviewCard(review)
+  else 
+    section.section-reviews
+      p.heading_secondary.align-reviews Login to see review.
