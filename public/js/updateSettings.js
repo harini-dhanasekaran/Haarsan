@@ -14,7 +14,7 @@ export const updateMe = async (data) => {
       showAlert('success','Your data are successfully updated');
       window.setTimeout(() => {
         location.reload(true);
-      }, 1000);
+      }, 1500);
     }
   } catch (err) {
     showAlert('error',err.response.data.message);

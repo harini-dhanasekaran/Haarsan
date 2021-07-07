@@ -78,6 +78,12 @@ body {
 .right {
   text-align: right !important;
 }
+.right--ch {
+  float: right !important;
+}
+.left {
+  text-align: left !important;
+}
 
 .line {
   margin: 6rem 0;
@@ -221,7 +227,10 @@ body {
   outline: none;
   background-color: #2e864b;
 }
-
+.btn--red:focus {
+  outline: none;
+  background-color: #f73c5b !important;
+}
 .btn--white {
   background-color: #fff;
   color: #777;
@@ -234,13 +243,33 @@ body {
   background-color: #55c57a;
   color: #fff;
 }
+.btn--red {
+  background-color: #f73c5b;
+  color: #fff;
+}
 .btn--green::after {
   background-color: #55c57a;
 }
+.btn--red::after {
+  background-color: #df2323;
+}
 
-.btn--small {
-  padding: 1.25rem 3rem !important;
-  font-size: 1.4rem !important;
+.btn--red,
+.btn--red:link,
+.btn--red:visited {
+  background-color: #f73c5b;
+  color: #fff;
+  font-size: 1.4rem;
+  padding: 1.25rem 3rem;
+  border-radius: 10rem;
+  text-transform: uppercase;
+  position: relative;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 400;
+  border: none;
 }
 
 .btn-small,
@@ -263,6 +292,9 @@ body {
 
 .btn-small:hover {
   background-color: #7dd56f;
+}
+.btn--red:hover {
+  background-color: #f73c5b;
 }
 
 .btn-text:link,
@@ -1359,4 +1391,22 @@ body {
   font-size: 3rem;
   color: black;
   font-weight: 600;
+}
+.password-eye {
+  position: relative;
+  float: right;
+  margin-top: -8%;
+  left: -3%;
+}
+.password-eye .num1 {
+  opacity: 1;
+}
+.password-eye .num1:hover {
+  opacity: 0;
+}
+.password-eye .num2 {
+  opacity: 0;
+}
+.password-eye .num2:hover {
+  opacity: 1;
 }

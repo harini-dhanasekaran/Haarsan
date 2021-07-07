@@ -21,16 +21,17 @@ if (resetForm) {
     const passwordConfirm = document.getElementById('passwordConfirm').value;
     const email = document.getElementById('email').value;
     const token = document.querySelector('.btn--new--pass').dataset.token;
-    resetPassword(password, passwordConfirm, token,email);
+    resetPassword(password, passwordConfirm, token, email);
   });
 }
 
 if (forgotForm) {
-  forgotForm.addEventListener('submit', (e) => {
+  forgotForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    document.querySelector('.btn--send--email').textContent = 'Sending...';
     const email = document.getElementById('email').value;
-    forgotPassword(email);
-    document.querySelector('.btn--submit--email').textContent ='Submitted';
+    await forgotPassword(email);
+    document.querySelector('.btn--send--email').textContent = 'Submit';
   });
 }
 
@@ -44,6 +45,7 @@ if (signUpForm) {
     signUp(name, email, password, passwordConfirm);
   });
 }
+
 if (loginForm) {
   loginForm.addEventListener('submit', (e) => {
     const email = document.getElementById('email').value;
