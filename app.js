@@ -9,6 +9,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 
+const cors=require('cors');
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
 //used for error handling
@@ -26,6 +27,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //global middleware
+
+//implements cors
+app.use(cors());
+app.options('*', cors());
+
 //secure http
 app.use(helmet());
 
