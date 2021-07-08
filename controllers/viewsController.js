@@ -6,9 +6,26 @@ const AppError = require('../utils/appError');
 
 exports.getOverview = catchAsync(async (req, res, next) => {
   // get the tour data
-  const tours = await Tour.find();
+  const page = req.query.page * 1 || 1;
+  const limit = 2;
+  const tourTemp = await Tour.find();
+  const totalTour = tourTemp.length;
+  const tours = await Tour.find()
+    .limit(limit * 1)
+    .skip((page - 1) * limit);
   //build the templete
   //render that template using tour data obtained
+  console.log(`current page =${page}`);
+  console.log(`next page =${page + 1}`);
+  console.log(`last page = ${Math.ceil((totalTour) / 2)}`);
+  console.log(`has prev page= ${page > 1}`);
+  console.log(`has next page= ${page * 2 < totalTour}`);
+  if(page > Math.ceil((totalTour) / 2)){
+    return res.status(400).render('error',{
+      title: 'error', 
+      msg:'The page doesnot exsits'
+    });
+  }
   res
     .status(200)
     .set(
@@ -18,6 +35,12 @@ exports.getOverview = catchAsync(async (req, res, next) => {
     .render('overview', {
       title: 'All Tours',
       tours: tours,
+      currentPage: page,
+      hasNextPage: 2 * page < totalTour,
+      hasPreviousPage: page > 1,
+      nextPage: page + 1,
+      previousPage: page - 1,
+      lastPage: Math.ceil((totalTour) / 2),
     });
 });
 
@@ -119,11 +142,11 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
 exports.resetPassword = catchAsync(async (req, res, next) => {
   if (!res.locals.user) {
-    const {token} = req.query;
+    const { token } = req.query;
     res.status(200).render('resetPassword', {
       title: 'Reset Password',
-      token:token,
-      email: req.params.email
+      token: token,
+      email: req.params.email,
     });
   } else {
     res.redirect('/');

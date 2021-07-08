@@ -4,7 +4,6 @@ const router = express.Router();
 const viewsController = require(`${__dirname}/../controllers/viewsController`);
 const authController = require('../controllers/authControllers');
 
-
 router.get('/signUp', viewsController.signUp);
 router.get('/forgotPassword',viewsController.forgotPassword);
 router.get('/resetPassword/:email',viewsController.resetPassword);
