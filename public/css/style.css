@@ -1268,7 +1268,6 @@ body {
   opacity: 1;
 }
 
-
 .pagination {
   display: flex;
   width: 100%;
@@ -1276,45 +1275,54 @@ body {
   margin-top: 10rem;
   justify-content: center;
 }
-  .pagination-item {
-    text-decoration: none;
-    position: relative;
-    margin: 0 10px;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3),
-      inset 0 -5px 0px rgba(80, 80, 80, 0.1),
-      inset 0 -10px 0px rgba(150, 150, 150, 0.1);
-    overflow: hidden;
-    color: #093170;
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
-    background-color: #efefef;
+.pagination-item {
+  text-decoration: none;
+  position: relative;
+  margin: 0 10px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3),
+    inset 0 -5px 0px rgba(80, 80, 80, 0.1),
+    inset 0 -10px 0px rgba(150, 150, 150, 0.1);
+  overflow: hidden;
+  color: #093170;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  background-color: #efefef;
+}
+.pagination-item:before,
+.pagination-item:after {
+  content: '';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 11;
+  background-image: linear-gradient(135deg, #28b487, #7dd56f);
+  transform: translateX(-100px);
+  transition: 0.3s ease-in-out;
+}
+
+.pagination-item:active {
+  box-shadow: none;
+}
+
+.pagination-item.active {
+  color: #fff;
+  background-image: linear-gradient(135deg, #28b487, #7dd56f);
+}
+
+@media only screen and (max-width: 600px) {
+  .card-container {
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 1rem;
   }
-    .pagination-item:before,
-    .pagination-item:after {
-      content: "";
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: 11;
-      background-image: linear-gradient(135deg, #28b487, #7dd56f);
-      transform: translateX(-100px);
-      transition: 0.3s ease-in-out;
-    }
-
-    .pagination-item:active {
-      box-shadow: none;
-    }
-
-    .pagination-item.active {
-      color: #fff;
-      background-image: linear-gradient(135deg, #28b487, #7dd56f);
-    }
+  .main{padding:0rem;}
+  .header{height:17rem;}
+}

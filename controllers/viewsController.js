@@ -7,7 +7,7 @@ const AppError = require('../utils/appError');
 exports.getOverview = catchAsync(async (req, res, next) => {
   // get the tour data
   const page = req.query.page * 1 || 1;
-  const limit = 2;
+  const limit = 1;
   const tourTemp = await Tour.find();
   const totalTour = tourTemp.length;
   const tours = await Tour.find()
@@ -15,12 +15,7 @@ exports.getOverview = catchAsync(async (req, res, next) => {
     .skip((page - 1) * limit);
   //build the templete
   //render that template using tour data obtained
-  console.log(`current page =${page}`);
-  console.log(`next page =${page + 1}`);
-  console.log(`last page = ${Math.ceil((totalTour) / 2)}`);
-  console.log(`has prev page= ${page > 1}`);
-  console.log(`has next page= ${page * 2 < totalTour}`);
-  if(page > Math.ceil((totalTour) / 2)){
+  if(page > Math.ceil((totalTour) / limit)){
     return res.status(400).render('error',{
       title: 'error', 
       msg:'The page doesnot exsits'
@@ -36,11 +31,11 @@ exports.getOverview = catchAsync(async (req, res, next) => {
       title: 'All Tours',
       tours: tours,
       currentPage: page,
-      hasNextPage: 2 * page < totalTour,
+      hasNextPage: limit * page < totalTour,
       hasPreviousPage: page > 1,
       nextPage: page + 1,
       previousPage: page - 1,
-      lastPage: Math.ceil((totalTour) / 2),
+      lastPage: Math.ceil((totalTour) / limit),
     });
 });
 

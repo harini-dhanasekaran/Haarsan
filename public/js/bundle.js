@@ -12358,14 +12358,37 @@ if (forgotForm) {
 }
 
 if (signUpForm) {
-  signUpForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var name = document.getElementById('name').value;
-    var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value;
-    var passwordConfirm = document.getElementById('passwordConfirm').value;
-    (0, _signUp.signUp)(name, email, password, passwordConfirm);
-  });
+  signUpForm.addEventListener('submit', /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(e) {
+      var name, email, password, passwordConfirm;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              e.preventDefault();
+              document.querySelector('.btn-sign-up').textContent = 'Signing Up...';
+              name = document.getElementById('name').value;
+              email = document.getElementById('email').value;
+              password = document.getElementById('password').value;
+              passwordConfirm = document.getElementById('passwordConfirm').value;
+              _context2.next = 8;
+              return (0, _signUp.signUp)(name, email, password, passwordConfirm);
+
+            case 8:
+              document.querySelector('.btn-sign-up').textContent = 'Sign Up';
+
+            case 9:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function (_x2) {
+      return _ref2.apply(this, arguments);
+    };
+  }());
 }
 
 if (loginForm) {
@@ -12394,18 +12417,18 @@ if (userDataForm) {
 
 if (userPasswordForm) {
   userPasswordForm.addEventListener('submit', /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(e) {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(e) {
       var curPass, newPass, conPass;
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
               e.preventDefault();
               document.querySelector('.btn--save--password').textContent = 'Updating...';
               curPass = document.getElementById('password-current').value;
               newPass = document.getElementById('password').value;
               conPass = document.getElementById('password-confirm').value;
-              _context2.next = 7;
+              _context3.next = 7;
               return (0, _updateSettings.updatePassword)(curPass, newPass, conPass);
 
             case 7:
@@ -12416,14 +12439,14 @@ if (userPasswordForm) {
 
             case 11:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2);
+      }, _callee3);
     }));
 
-    return function (_x2) {
-      return _ref2.apply(this, arguments);
+    return function (_x3) {
+      return _ref3.apply(this, arguments);
     };
   }());
 }
@@ -12455,7 +12478,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58473" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58267" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

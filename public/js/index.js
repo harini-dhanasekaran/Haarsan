@@ -36,13 +36,15 @@ if (forgotForm) {
 }
 
 if (signUpForm) {
-  signUpForm.addEventListener('submit', (e) => {
+  signUpForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    document.querySelector('.btn-sign-up').textContent = 'Signing Up...';
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const passwordConfirm = document.getElementById('passwordConfirm').value;
-    signUp(name, email, password, passwordConfirm);
+    await signUp(name, email, password, passwordConfirm);
+    document.querySelector('.btn-sign-up').textContent = 'Sign Up';
   });
 }
 
