@@ -7,7 +7,7 @@ const AppError = require('../utils/appError');
 exports.getOverview = catchAsync(async (req, res, next) => {
   // get the tour data
   const page = req.query.page * 1 || 1;
-  const limit = 1;
+  const limit = 2;
   const tourTemp = await Tour.find();
   const totalTour = tourTemp.length;
   const tours = await Tour.find()
