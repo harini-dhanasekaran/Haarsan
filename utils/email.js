@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const pug = require('pug');
-const htmlToText  = require('html-to-text');
+const htmlToText = require('html-to-text');
 
 module.exports = class Email {
   constructor(user, url) {
@@ -14,10 +14,10 @@ module.exports = class Email {
     if (process.env.NODE_ENV === 'production') {
       //sendgrid.sendgrid
       return nodemailer.createTransport({
-        service: 'gmail',
+        service: 'SendGrid',
         auth: {
-          user: process.env.EMAIL_FROM,
-          pass: process.env.EMAIL_PASS,
+          user: process.env.SENDGRID_USERNAME,
+          pass: process.env.SENDGRID_PASS,
         },
       });
     }
@@ -53,7 +53,7 @@ module.exports = class Email {
     await this.send('welcome', 'Welcome to Haarsans Tours');
   }
 
-  async sendPasswordReset(){
+  async sendPasswordReset() {
     await this.send('passwdReset', 'Reset password link');
   }
 };
