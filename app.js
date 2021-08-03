@@ -82,11 +82,6 @@ app.use(
 
 app.use(compression());
 
-//user defined middleware to check the request time
-app.use((req, res, next) => {
-  req.reqestTime = new Date().toISOString();
-  next();
-});
 
 const viewsRouter = require('./routes/viewsRouter');
 const tourRouter = require('./routes/tourRoutes');
