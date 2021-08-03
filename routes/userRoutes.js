@@ -25,11 +25,8 @@ router.use(authController.restrictTo('admin'));
 
 router
   .route('/')
-  .get(userController.getAllUsers)
-  .post(userController.createUser);
+  .get(userController.getAllUsers);
 router
   .route('/:id')
-  .get(userController.getUser)
-  .patch(userController.updateUser) //dont try to update password
-  .delete(userController.deleteUser);
+  .get(userController.getUser);
 module.exports = router;

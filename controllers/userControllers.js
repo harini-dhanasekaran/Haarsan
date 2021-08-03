@@ -4,19 +4,8 @@ const User = require('../models/userModel.js');
 const catchAsync = require('../utils/catchAsync.js');
 const AppError = require('../utils/appError.js');
 const factory = require('./handleFactory');
-// hit db to get the url
-// bit.ly/erRi3949 -> www.google.com
 
-//to store in disk memeory
-// const multerStorage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, 'public/img/users');
-//   },
-//   filename: (req, file, cb) => {
-//     const ext = file.mimetype.split('/')[1];
-//     cb(null, `user-${req.user.id}-${Date.now()}.${ext}`);
-//   },
-// });
+
 
 //memoryStorage is used to store in buffer volatile
 
@@ -52,9 +41,6 @@ const filterObj = (obj, ...allowed) => {
 };
 
 exports.getAllUsers = factory.getAll(User);
-exports.deleteUser = factory.deleteOne(User);
-exports.updateUser = factory.updateOne(User);
-exports.createUser = factory.createOne(User);
 exports.getUser = factory.getOne(User);
 
 exports.getMe = function (req, res, next) {
@@ -88,10 +74,3 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.deleteMe = catchAsync(async (req, res, next) => {
-  await User.findByIdAndUpdate(req.user.id, { active: false });
-  res.status(200).json({
-    stauts: 'success',
-    data: null,
-  });
-});

@@ -101,15 +101,6 @@ tourSchema.pre('save', function (next) {
   next();
 });
 
-//query middleware /find/ is regular expression so that all find methods can be included
-//to create secret tour
-//have skipped 1 function
-
-tourSchema.pre(/^find/, function (next) {
-  this.find({ secret: { $ne: true } });
-  next();
-});
-
 tourSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'guides',
@@ -118,59 +109,7 @@ tourSchema.pre(/^find/, function (next) {
   next();
 });
 
-//aggregate middleware
-
-tourSchema.pre('aggreate', function (next) {
-  this.pipeline.unshift({ $match: { secret: { $ne: true } } });
-  next();
-});
-
-// can also use post which has access to both doc and next.
-//it is executed after all the pre hooks/middleware
-// tourSchema.post('save', (doc , next) => {
-//   console.log(doc);
-//   next();
-// });
 const Tour = mongoose.model('Tour', tourSchema);
 module.exports = Tour;
 
-//we call a function (method) on the  new document itself
-// const testTour1 = new Tour({
-//   name: 'The Forest Hicker',
-//   rating: 4.7,
-//   price: 497,
-// });
 
-// testTour1
-//   .save()
-//   .then((doc) => {
-//     console.log(doc);
-//   })
-//   .catch((err) => {
-//     console.log('ERROR:', err);
-//   });
-
-// startLocation: {
-//   //GeoJson
-//   type: {
-//     type: String,
-//     default: 'Point',
-//     enum: ['Point'],
-//   },
-//   coordinates: [Number],
-//   address: String,
-//   description: String,
-// },
-// locations: [
-//   {
-//     type: {
-//       type: String,
-//       default: 'Point',
-//       enum: ['Point'],
-//     },
-//     coordiantes: [Number],
-//     address: { type: String },
-//     description: { type: String },
-//     day: { type: Number },
-//   },
-// ],
