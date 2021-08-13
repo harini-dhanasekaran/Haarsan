@@ -18,7 +18,6 @@ router.use(authController.protect);
 router.patch('/updatePassword', authController.updatePassword);
 router.get('/me', userController.getMe, userController.getUser);
 router.patch('/updateMe',userController.uploadPhoto, userController.resizeUserPhoto ,userController.updateMe);
-router.delete('/deleteMe', userController.deleteMe);
 
 //middleware to allow only the admins to manipulate the user db
 router.use(authController.restrictTo('admin'));

@@ -1,6 +1,5 @@
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
-const APIfeatures = require('../utils/apiFeatures.js');
 
 exports.getOne = (Model, popOptions) =>
   catchAsync(async (req, res, next) => {
@@ -22,7 +21,7 @@ exports.getAll = (Model) =>
     let filter = {};
     if (req.params.tourId) filter = { tour: req.params.tourId };
     //wait till the end of the query is pas2sed through various features(methods)
-    const docA = await features.query; //.explain(); to see query results
+    const docA = Model.findById(filter);
 
     res.status(200).json({
       status: 'success',
